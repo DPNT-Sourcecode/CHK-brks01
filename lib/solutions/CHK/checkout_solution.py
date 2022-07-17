@@ -14,7 +14,9 @@ ITEM_OFFERS = {
 
 
 def get_special_price(sku: str) -> Tuple[Any, Any, int]:
-    item = ITEM_OFFERS[sku]
+    item = ITEM_OFFERS.get(sku, None)
+    if not item:
+        return 0, 0, 0
     return item[1], item[2], item[3]
 
 
@@ -43,6 +45,7 @@ def split_sku_str_number(skus: str) -> List[Tuple[str, int]]:
         else:
             modified_results.append((item[-1], int(item[:-1])))
     return modified_results
+
 
 
 
