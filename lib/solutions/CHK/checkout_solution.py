@@ -15,6 +15,3 @@ def split_sku_str_number(skus: str) -> List:
     if match:
         items = match.groups()
     print(items)
-
-
-
