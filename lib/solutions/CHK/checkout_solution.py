@@ -2,7 +2,7 @@
 
 # noinspection PyUnusedLocal
 # skus = unicode string
-from typing import List, Union
+from typing import List, Tuple
 import re
 
 
@@ -13,14 +13,16 @@ def checkout(skus: str) -> int:
     return 0
 
 
-def split_sku_str_number(skus: str) -> List[Union[str, int]]:
-    result = [i for i in re.split(r"(\d+[A-Z]{1})|([A-Z])", "XYZ3BAT") if i]
-    temp = []
-    for item in result:
+def split_sku_str_number(skus: str) -> List[Tuple[str, int]]:
+    results = [i for i in re.split(r"(\d+[A-Z]{1})|([A-Z])", skus) if i]
+    modified_results = []
+    for item in results:
         if len(item) == 1:
-            temp.append(item, 1)
+            modified_results.append((item, 1))
         else:
-            temp.append(item[-1], item)
+            modified_results.append((item[-1], item[:-1]))
+    return modified_results
+
 
 
 
