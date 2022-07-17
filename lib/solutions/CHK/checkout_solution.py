@@ -11,10 +11,10 @@ def checkout(skus: str) -> int:
 
 
 def split_sku_str_number(skus: str) -> List:
-    match = re.match("(\d[A-Z]+)", skus, re.I)
-    if match:
-        items = match.groups()
-    print(items)
+    results = []
+    for elem in skus:
+        if elem
+
 
 
 
