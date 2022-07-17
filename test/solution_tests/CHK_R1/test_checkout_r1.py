@@ -14,4 +14,9 @@ class TestCheckout:
         result = checkout_solution.split_sku_str_number("3AB2C")
         assert result[0][1] == 3
 
+    def test_symbols_input(self) -> None:
+        result = checkout_solution.checkout("-")
+        assert result == -1
+
+
 
