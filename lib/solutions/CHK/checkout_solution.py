@@ -2,7 +2,7 @@
 
 # noinspection PyUnusedLocal
 # skus = unicode string
-from typing import List, Tuple
+from typing import List, Tuple, Any, Optional
 import re
 # (item, amount, special_offer, price_per_unit)
 ITEM_OFFERS = {
@@ -13,10 +13,20 @@ ITEM_OFFERS = {
 }
 
 
+def get_special_price(sku: str) -> Tuple[Any, Any]:
+    item = ITEM_OFFERS[sku]
+    return item[1], item[2]
+
 def checkout(skus: str) -> int:
     if not isinstance(skus, str):
         return -1
     container = split_sku_str_number(skus)
+    total = 0
+    for item in container:
+        tmp = get_special_price(item[0])
+        if tmp[0]:
+            item_total = item[1] % tmp[0]
+
     return 0
 
 
@@ -29,10 +39,4 @@ def split_sku_str_number(skus: str) -> List[Tuple[str, int]]:
         else:
             modified_results.append((item[-1], int(item[:-1])))
     return modified_results
-
-
-
-
-
-
 

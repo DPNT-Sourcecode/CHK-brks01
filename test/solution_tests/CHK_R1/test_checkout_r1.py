@@ -13,4 +13,3 @@ class TestCheckout:
     def test_split_str_number(self) -> None:
         result = checkout_solution.split_sku_str_number("3AB2C")
         assert result[0][1] == 3
-
