@@ -7,5 +7,3 @@ class TestHello:
 
     def test_hello_fail(self) -> None:
         assert hello_solution.hello("") == "None"
-
-
