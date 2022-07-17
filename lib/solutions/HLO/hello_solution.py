@@ -5,5 +5,6 @@
 def hello(friend_name: str) -> str:
     if not friend_name:
         return "None"
-    return "Hello, World!"
+    return f"Hello, {friend_name}!"
+
 
