@@ -48,10 +48,3 @@ def split_sku_str_number(skus: str) -> List[Tuple[str, int]]:
             modified_results.append((item[-1], int(item[:-1])))
     return modified_results
 
-
-
-
-
-
-
-
