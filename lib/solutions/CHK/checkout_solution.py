@@ -14,7 +14,8 @@ def checkout(skus: str) -> int:
 
 
 def split_sku_str_number(skus: str) -> List[Union[str, int]]:
-    r = re.compile(r"(\d+[A-Z]{1})|([A-Z])")
+    r = re.compile(r"(\d+[A-Z]{1})|([A-Z])|([A-Z]{1}\d+)")
     result = r.match(skus).groups()
     return [i for i in re.split(r"(\d+[A-Z]{1})|([A-Z])", "XYZ3BAT") if i]
+
 
