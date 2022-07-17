@@ -11,7 +11,8 @@ def checkout(skus: str) -> int:
 
 
 def split_sku_str_number(skus: str) -> List:
-    match = re.split("(/d)", skus)
+    match = re.split("(/d{})", skus)
     if match:
         items = match.groups()
     print(items)
+
