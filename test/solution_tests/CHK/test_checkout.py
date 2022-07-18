@@ -1,5 +1,5 @@
 import pytest
-from typing import List, Tuple, Any
+from typing import Tuple, Any
 from lib.solutions.CHK import checkout_solution
 
 
@@ -20,4 +20,5 @@ class TestCheckout:
     def test_symbols_input(self) -> None:
         result = checkout_solution.checkout("-")
         assert result == -1
+
 
