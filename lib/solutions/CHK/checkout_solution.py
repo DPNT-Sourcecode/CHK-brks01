@@ -42,6 +42,7 @@ def checkout(skus: str) -> int:
         if tmp[2] == 0:
             continue
         if tmp[0] and item[1] >= tmp[0]:
+            #symbol
             discount = item[1] // tmp[0]
             non_discount = item[1] % tmp[0]
             total += ((discount*tmp[1]) + non_discount*tmp[2])
@@ -50,15 +51,33 @@ def checkout(skus: str) -> int:
 
     return total
 
+@dataclass
+class Offer:
+    symbol: str
+
 
 @dataclass
 class SKU:
     """
     Represents SKU item with corresponding offers if any
-    Example: sku: A, offers --> [(3,130), (5)]
+    Example: symbol: A, offers --> [(3,130), (5, 200)], count --> 2
+            This SKU doesn't qualify for available discounts. count has to be 3 or more to qualify
     """
     symbol: str
     offers: List[Tuple[int, int]]
+    count: int
+    price: int
+
+    def has_special_offers(self) -> bool:
+        return len(self.offers) > 0
+
+    def calculate_total_cost(self) -> int:
+        if not self.has_special_offers():
+            return self.count * self.price
+        else:
+            special_offer = self.count //
+
+
 
 
 
@@ -73,6 +92,7 @@ class SuperMarket:
             Based on the special offers table, we apply necessary offers to SKUs that have special
             offers
         """
+
 
 
 
