@@ -2,9 +2,9 @@
 
 # noinspection PyUnusedLocal
 # skus = unicode string
-from typing import List, Any
+import re
+from typing import List, Any, Tuple
 from dataclasses import dataclass
-from lib.solutions.utils import checkout_helpers
 
 
 PRICE_TABLE = {
@@ -21,6 +21,23 @@ SPECIALS_PRICE_TABLE = {
     "E": [(2, -30)]
 }
 
+
+def split_sku_str_number(skus: str) -> List[Tuple[str, int]]:
+    """ Map sku character string with corresponding count
+    """
+    results = [i for i in re.split(r"(\d+[A-Z]{1})|([A-Z])", skus) if i]
+    tmp = {}
+    for item in results:
+        if len(item) == 1 and item not in tmp:
+            tmp[item] = 1
+        elif len(item) > 1:
+            if item[-1] not in tmp:
+                tmp[item[-1]] = int(item[:-1])
+            else:
+                tmp[item[-1]] += int(item[:-1])
+        else:
+            tmp[item] += 1
+    return list(zip(tmp.keys(), tmp.values()))
 
 @dataclass
 class Offer:
@@ -86,7 +103,7 @@ class SuperMarket:
         self.shopping_cart: List[SKU] = []
 
     def build_shopping_cart(self) -> None:
-        cart = checkout_helpers.split_sku_str_number(self.skus)
+        cart = split_sku_str_number(self.skus)
         for item in cart:
             price = get_sku_price(symbol=item[0])
             offers = get_offers(symbol=item[0])
@@ -110,6 +127,7 @@ def checkout(skus: str) -> int:
     super_market = SuperMarket(skus=skus)
     super_market.build_shopping_cart()
     return super_market.compute_checkout_cost()
+
 
 
 
