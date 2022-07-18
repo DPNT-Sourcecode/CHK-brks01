@@ -1,13 +1,13 @@
 import pytest
-
+from typing import List, Tuple, Any
 from lib.solutions.CHK import checkout_solution
 
 
 class TestCheckout:
-    @pytest.mark("inputs", [("AAA", 130), ("", 0), ("3A2BC2A", )])
-    def test_checkout_round_1(self) -> None:
-        result = checkout_solution.checkout("")
-        assert result == 0
+    @pytest.mark.parametrize("inputs", [("AAA", 130), ("", 0), ("3A2BC2A", 295)])
+    def test_checkout_round_1(self, inputs: Tuple[Any, int]) -> None:
+        result = checkout_solution.checkout(inputs[0])
+        assert result == inputs[1]
 
     def test_checkout_round_1_fail(self) -> None:
         result = checkout_solution.checkout(123)
@@ -20,6 +20,7 @@ class TestCheckout:
     def test_symbols_input(self) -> None:
         result = checkout_solution.checkout("-")
         assert result == -1
+
 
 
 
