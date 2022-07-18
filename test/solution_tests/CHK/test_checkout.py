@@ -4,8 +4,7 @@ from lib.solutions.CHK import checkout_solution
 
 
 class TestCheckout:
-    # [("4A2B2E", 275), ("AAA", 130), ("", 0), ("3A2BC2A", 295)]
-    @pytest.mark.parametrize("inputs", [("3A2BC2A", 295)])
+    @pytest.mark.parametrize("inputs", [("4A2B2E", 275), ("AAA", 130), ("", 0), ("3A2BC2A", 265)])
     def test_checkout_round_1(self, inputs: Tuple[Any, int]) -> None:
         result = checkout_solution.checkout(inputs[0])
         assert result == inputs[1]
@@ -21,3 +20,4 @@ class TestCheckout:
     def test_symbols_input(self) -> None:
         result = checkout_solution.checkout("-")
         assert result == -1
+
