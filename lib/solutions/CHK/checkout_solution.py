@@ -42,7 +42,8 @@ def checkout(skus: str) -> int:
         if tmp[2] == 0:
             continue
         if tmp[0] and item[1] >= tmp[0]:
-            #symbol
+            #discount_items = symbol // discount_amount
+            # non_discount =
             discount = item[1] // tmp[0]
             non_discount = item[1] % tmp[0]
             total += ((discount*tmp[1]) + non_discount*tmp[2])
@@ -54,15 +55,12 @@ def checkout(skus: str) -> int:
 
 @dataclass
 class Offer:
-    free_special_offer_items: List[str] = []
-    count: int
-    base_price: int
+    free_special_offer_items: List[str]
+    discount_amount: int
     special_price: int
 
     def add_free_specials(self, symbol: str) -> None:
         self.free_special_offer_items.append(symbol)
-
-
 
 
 @dataclass
@@ -73,36 +71,48 @@ class SKU:
             This SKU doesn't qualify for available discounts. count has to be 3 or more to qualify
     """
     symbol: str
-    offers: List[Offer]
     count: int
     price: int
+    offers: List[Offer]
+    total_cost: int = 0
 
     def has_special_offers(self) -> bool:
         return len(self.offers) > 0
 
-    def calculate_total_cost(self) -> int:
+    def calculate_cost(self) -> None:
         if not self.has_special_offers():
             return self.count * self.price
         else:
             for offer in self.offers:
+                discount_total = self.count // offer.discount_amount
+                non_discount_total = self.count % offer.discount_amount
+                self.total_cost += ((discount_total * offer.special_price) + (non_discount_total * self.price))
+
+
+    def calculate_total_cost(self) -> None:
 
 
 
 
 
 
-
+@dataclass
 class SuperMarket:
-    def __init__(self):
-        pass
+    skus: str
 
-    def checkout(self, skus: str) -> int:
-        """ Calculates total prices given skus strings
+
+    def build_shopping_cart(self) -> List[SKU]:
+        cart = utils.split_sku_str_number(self.skus)
+
+
+    def checkout(self) -> int:
+        """ Calculates total prices given List of SKUs
         Note:
             Translates skus into key-value where key is the SKU and value is the SKU count.
             Based on the special offers table, we apply necessary offers to SKUs that have special
             offers
         """
+
 
 
 
