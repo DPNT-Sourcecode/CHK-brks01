@@ -34,7 +34,7 @@ class SKU:
 
     def calculate_sku_total_cost(self) -> None:
         if not self.has_special_offers():
-            return self.count * self.price
+            self.sku_total_cost += (self.count * self.price)
         else:
             temp_count = self.count
             for offer in self.offers:
@@ -83,6 +83,7 @@ def checkout(skus: str) -> int:
     super_market = SuperMarket(skus=skus)
     super_market.build_shopping_cart()
     return super_market.compute_checkout_cost()
+
 
 
 
