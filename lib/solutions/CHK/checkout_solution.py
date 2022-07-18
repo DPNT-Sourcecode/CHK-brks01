@@ -14,6 +14,8 @@ ITEM_OFFERS = {
 
 
 def get_special_price(sku: str) -> Tuple[Any, Any, int]:
+    """ Retrieve special offer cost if available
+    """
     item = ITEM_OFFERS.get(sku, None)
     if not item:
         return 0, 0, 0
@@ -21,6 +23,12 @@ def get_special_price(sku: str) -> Tuple[Any, Any, int]:
 
 
 def checkout(skus: str) -> int:
+    """" Calculates total prices given skus strings
+    Note:
+        Translates skus into key-value where key is the SKU and value is the SKU count.
+        Based on the special offers table, we apply necessary offers to SKUs that have special
+        offers
+    """
     if not isinstance(skus, str) or (len(skus) > 0 and not skus.isupper()):
         return -1
 
@@ -41,6 +49,8 @@ def checkout(skus: str) -> int:
 
 
 def split_sku_str_number(skus: str) -> List[Tuple[str, int]]:
+    """ Map sku character string with corresponding count
+    """
     results = [i for i in re.split(r"(\d+[A-Z]{1})|([A-Z])", skus) if i]
     tmp = {}
     for item in results:
@@ -54,10 +64,6 @@ def split_sku_str_number(skus: str) -> List[Tuple[str, int]]:
         else:
             tmp[item] += 1
     return list(zip(tmp.keys(), tmp.values()))
-
-
-
-
 
 
 
