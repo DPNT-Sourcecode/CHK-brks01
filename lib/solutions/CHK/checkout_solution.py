@@ -42,12 +42,15 @@ def checkout(skus: str) -> int:
 def split_sku_str_number(skus: str) -> List[Tuple[str, int]]:
     results = [i for i in re.split(r"(\d+[A-Z]{1})|([A-Z])", skus) if i]
     modified_results = []
+    tmp = []
     for item in results:
         if len(item) == 1:
             modified_results.append((item, 1))
         else:
             modified_results.append((item[-1], int(item[:-1])))
+    for item in modified_results
     return modified_results
+
 
 
 
