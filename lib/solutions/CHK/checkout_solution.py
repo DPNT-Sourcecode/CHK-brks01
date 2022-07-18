@@ -57,7 +57,8 @@ class SuperMarket:
     def compute_checkout_cost(self) -> int:
         if not self.build_shopping_cart():
             return 0
-        return sum(item.sku_total_cost for item in self.shopping_cart)
+        result = sum(item.sku_total_cost for item in self.shopping_cart)
+        return result
 
 
 def checkout(skus: str) -> int:
@@ -69,6 +70,7 @@ def checkout(skus: str) -> int:
     super_market = SuperMarket(skus=skus)
     super_market.build_shopping_cart()
     return super_market.compute_checkout_cost()
+
 
 
 
