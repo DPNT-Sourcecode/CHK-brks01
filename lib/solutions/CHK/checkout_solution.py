@@ -21,7 +21,7 @@ def get_special_price(sku: str) -> Tuple[Any, Any, int]:
 
 
 def checkout(skus: str) -> int:
-    if not isinstance(skus, str) or not skus.isalnum() or not skus.isupper():
+    if not isinstance(skus, str) or not skus.isupper():
         return -1
 
     container = split_sku_str_number(skus)
@@ -55,6 +55,7 @@ def split_sku_str_number(skus: str) -> List[Tuple[str, int]]:
         else:
             tmp[item] += 1
     return list(zip(tmp.keys(), tmp.values()))
+
 
 
 
