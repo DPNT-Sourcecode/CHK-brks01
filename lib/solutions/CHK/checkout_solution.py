@@ -52,6 +52,15 @@ def checkout(skus: str) -> int:
     return total
 
 
+@dataclass
+class Offer:
+    free_special_offer_items: List[str]
+    count: int
+    base_price: int
+    special_price: int
+
+    def compose_free_specials(self, condition:):
+
 
 @dataclass
 class SKU:
@@ -73,7 +82,7 @@ class SKU:
             return self.count * self.price
         else:
             for offer in self.offers:
-                
+
 
 
 
@@ -91,6 +100,7 @@ class SuperMarket:
             Based on the special offers table, we apply necessary offers to SKUs that have special
             offers
         """
+
 
 
 
