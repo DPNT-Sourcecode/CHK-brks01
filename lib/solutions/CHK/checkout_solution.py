@@ -6,6 +6,7 @@ from typing import List, Any
 from dataclasses import dataclass
 from lib.solutions.utils import checkout_helpers
 
+
 PRICE_TABLE = {
     "A": 50,
     "B": 30,
@@ -62,8 +63,8 @@ class SKU:
                         self.sku_total_cost += total
                     temp_count -= offer.discount_amount
 
-def get_offers(symbol: str) -> List[Any]:
 
+def get_offers(symbol: str) -> List[Any]:
     offers = SPECIALS_PRICE_TABLE.get(symbol, [])
     offer_container = []
     if not offers:
@@ -109,6 +110,7 @@ def checkout(skus: str) -> int:
     super_market = SuperMarket(skus=skus)
     super_market.build_shopping_cart()
     return super_market.compute_checkout_cost()
+
 
 
 
