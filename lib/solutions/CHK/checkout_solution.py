@@ -51,9 +51,6 @@ def checkout(skus: str) -> int:
 
     return total
 
-@dataclass
-class Offer:
-    symbol: str
 
 
 @dataclass
@@ -75,7 +72,9 @@ class SKU:
         if not self.has_special_offers():
             return self.count * self.price
         else:
-            special_offer = self.count //
+            for offer in self.offers:
+                
+
 
 
 
@@ -92,6 +91,7 @@ class SuperMarket:
             Based on the special offers table, we apply necessary offers to SKUs that have special
             offers
         """
+
 
 
 
