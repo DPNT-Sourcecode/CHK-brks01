@@ -43,7 +43,12 @@ class SKU:
                 if discount_total == 0:
                     continue
                 else:
-                    self.sku_total_cost += ((discount_total * offer.special_price) + (non_discount_total * self.price))
+                    total = ((discount_total * offer.special_price) + (non_discount_total * self.price))
+                    if offer.special_price < 0:
+                        # free item offered, discount will apply to sku regular price
+                        self.sku_total_cost += ((self.count * self.price) + total)
+                    else:
+                        self.sku_total_cost += total
 
 
 class SuperMarket:
@@ -77,6 +82,7 @@ def checkout(skus: str) -> int:
     super_market = SuperMarket(skus=skus)
     super_market.build_shopping_cart()
     return super_market.compute_checkout_cost()
+
 
 
 
