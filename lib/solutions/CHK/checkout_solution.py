@@ -94,18 +94,17 @@ class SKU:
 
 
 
-
-
-
-@dataclass
 class SuperMarket:
-    skus: str
-    shopping_cart: List[SKU]
+
+    def __init__(self, skus: str):
+        self.skus: str = skus
+        self.shopping_cart: List[SKU] = []
 
 
     def build_shopping_cart(self) -> None:
         cart = utils.split_sku_str_number(self.skus)
-        for item in cart
+        for item in cart:
+            SKU()
 
 
     def checkout(self) -> int:
@@ -115,6 +114,7 @@ class SuperMarket:
             Based on the special offers table, we apply necessary offers to SKUs that have special
             offers
         """
+
 
 
 
