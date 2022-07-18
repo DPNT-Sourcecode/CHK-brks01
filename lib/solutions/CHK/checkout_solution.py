@@ -9,41 +9,10 @@ from lib.solutions.utils import checkout_helpers
 # (item, amount, special_offer, price_per_unit)
 
 
-"""
-def checkout(skus: str) -> int:
-    Calculates total prices given skus strings
-    Note:
-        Translates skus into key-value where key is the SKU and value is the SKU count.
-        Based on the special offers table, we apply necessary offers to SKUs that have special
-        offers
-
-
-
-    container = utils.split_sku_str_number(skus)
-    total = 0
-    for item in container:
-        tmp = get_special_price(item[0])
-        if tmp[2] == 0:
-            continue
-        if tmp[0] and item[1] >= tmp[0]:
-            #discount_items = symbol // discount_amount
-            # non_discount =
-            discount = item[1] // tmp[0]
-            non_discount = item[1] % tmp[0]
-            total += ((discount*tmp[1]) + non_discount*tmp[2])
-        else:
-            total += (item[1]*tmp[2])
-
-    return total
-"""
-
 @dataclass
 class Offer:
     discount_amount: int
     special_price: int
-
-
-
 
 
 @dataclass
@@ -66,7 +35,6 @@ class SKU:
         if not self.has_special_offers():
             return self.count * self.price
         else:
-            # 2AB3E
             for offer in self.offers:
                 discount_total = self.count // offer.discount_amount
                 non_discount_total = self.count % offer.discount_amount
@@ -87,15 +55,13 @@ class SuperMarket:
             self.shopping_cart.append(SKU(symbol=item[0], count=item[1], price=price, offers=offers))
 
     def compute_checkout_cost(self) -> int:
-        total = 
+        if not self.build_shopping_cart():
+            return 0
+        return sum(item.sku_total_cost for item in self.shopping_cart)
 
 
 def checkout(skus: str) -> int:
     """ Calculates total prices given List of SKUs
-    Note:
-    Translates skus into key-value where key is the SKU and value is the SKU count.
-    Based on the special offers table, we apply necessary offers to SKUs that have special
-    offers
     """
 
     if not isinstance(skus, str) or (len(skus) > 0 and not skus.isupper()):
@@ -103,6 +69,7 @@ def checkout(skus: str) -> int:
     super_market = SuperMarket(skus=skus)
     super_market.build_shopping_cart()
     return super_market.compute_checkout_cost()
+
 
 
 
