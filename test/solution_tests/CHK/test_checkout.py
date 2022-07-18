@@ -19,7 +19,3 @@ class TestCheckout:
 
     def test_get_offers(self) -> None:
         assert checkout_solution.get_offers("C") == []
-
-
-
-

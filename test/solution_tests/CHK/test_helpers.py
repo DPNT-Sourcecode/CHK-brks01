@@ -7,5 +7,3 @@ class TestCheckoutHelpers:
         assert result[0][1] == 3
 
 
-
-

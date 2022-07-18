@@ -21,5 +21,3 @@ def split_sku_str_number(skus: str) -> List[Tuple[str, int]]:
 
 
 
-
-
