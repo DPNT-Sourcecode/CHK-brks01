@@ -51,5 +51,3 @@ def get_offers(symbol: str) -> List[Any]:
 
 def get_sku_price(symbol: str) -> int:
     return PRICE_TABLE.get(symbol, 0)
-
-
