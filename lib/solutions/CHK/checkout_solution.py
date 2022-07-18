@@ -2,18 +2,15 @@
 
 # noinspection PyUnusedLocal
 # skus = unicode string
-from typing import List, Tuple, Any, Optional
-import re
+from typing import List
 from dataclasses import dataclass
 from lib.solutions.utils import checkout_helpers
-# (item, amount, special_offer, price_per_unit)
 
 
 @dataclass
 class Offer:
     discount_amount: int
     special_price: int
-
 
 
 @dataclass
@@ -83,6 +80,7 @@ def checkout(skus: str) -> int:
     super_market = SuperMarket(skus=skus)
     super_market.build_shopping_cart()
     return super_market.compute_checkout_cost()
+
 
 
 
