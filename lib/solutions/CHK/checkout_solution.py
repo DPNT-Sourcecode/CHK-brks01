@@ -54,12 +54,15 @@ def checkout(skus: str) -> int:
 
 @dataclass
 class Offer:
-    free_special_offer_items: List[str]
+    free_special_offer_items: List[str] = []
     count: int
     base_price: int
     special_price: int
 
-    def compose_free_specials(self, condition:):
+    def add_free_specials(self, symbol: str) -> None:
+        self.free_special_offer_items.append(symbol)
+
+
 
 
 @dataclass
@@ -70,7 +73,7 @@ class SKU:
             This SKU doesn't qualify for available discounts. count has to be 3 or more to qualify
     """
     symbol: str
-    offers: List[Tuple[int, int]]
+    offers: List[Offer]
     count: int
     price: int
 
@@ -100,6 +103,7 @@ class SuperMarket:
             Based on the special offers table, we apply necessary offers to SKUs that have special
             offers
         """
+
 
 
 
