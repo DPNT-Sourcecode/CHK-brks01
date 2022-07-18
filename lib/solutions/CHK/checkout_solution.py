@@ -14,8 +14,9 @@ class Offer:
     discount_amount: int
     special_price: int
 
-    def __getitem__(self, item):
-        
+    def __getitem__(self, key):
+        return key
+
 
 
 @dataclass
@@ -76,6 +77,7 @@ def checkout(skus: str) -> int:
     super_market = SuperMarket(skus=skus)
     super_market.build_shopping_cart()
     return super_market.compute_checkout_cost()
+
 
 
 
