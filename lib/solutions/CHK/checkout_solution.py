@@ -31,7 +31,7 @@ class SKU:
     def has_special_offers(self) -> bool:
         return len(self.offers) > 0
 
-    def calculate_sku_total_ost(self) -> None:
+    def calculate_sku_total_cost(self) -> None:
         if not self.has_special_offers():
             return self.count * self.price
         else:
@@ -52,7 +52,9 @@ class SuperMarket:
         for item in cart:
             price = checkout_helpers.get_sku_price(symbol=item[0])
             offers = checkout_helpers.get_offers(symbol=item[0])
-            self.shopping_cart.append(SKU(symbol=item[0], count=item[1], price=price, offers=offers))
+            sku = SKU(symbol=item[0], count=item[1], price=price, offers=offers)
+            sku.calculate_sku_total_cost()
+            self.shopping_cart.append(sku)
 
     def compute_checkout_cost(self) -> int:
         if not self.build_shopping_cart():
@@ -70,6 +72,7 @@ def checkout(skus: str) -> int:
     super_market = SuperMarket(skus=skus)
     super_market.build_shopping_cart()
     return super_market.compute_checkout_cost()
+
 
 
 
