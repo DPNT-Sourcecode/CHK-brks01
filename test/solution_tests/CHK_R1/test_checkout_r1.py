@@ -1,10 +1,13 @@
+import pytest
+
 from lib.solutions.CHK import checkout_solution
 
 
 class TestCheckout:
+    @pytest.mark("inputs", [("AAA", 130), ("", 0), ("3A2BC2A", )])
     def test_checkout_round_1(self) -> None:
         result = checkout_solution.checkout("")
-        assert result == 20
+        assert result == 0
 
     def test_checkout_round_1_fail(self) -> None:
         result = checkout_solution.checkout(123)
@@ -17,5 +20,6 @@ class TestCheckout:
     def test_symbols_input(self) -> None:
         result = checkout_solution.checkout("-")
         assert result == -1
+
 
 
