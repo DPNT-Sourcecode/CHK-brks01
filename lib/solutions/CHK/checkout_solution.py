@@ -34,7 +34,8 @@ def checkout(skus: str) -> int:
             discount = item[1] // tmp[0]
             non_discount = item[1] % tmp[0]
             total += ((discount*tmp[1]) + non_discount*tmp[2])
-        total += (item[1]*tmp[2])
+        else:
+            total += (item[1]*tmp[2])
 
     return total
 
@@ -54,6 +55,7 @@ def split_sku_str_number(skus: str) -> List[Tuple[str, int]]:
         else:
             tmp[item] += 1
     return list(zip(tmp.keys(), tmp.values()))
+
 
 
 
