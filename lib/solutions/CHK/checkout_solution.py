@@ -4,7 +4,9 @@
 # skus = unicode string
 from typing import List, Tuple, Any, Optional
 import re
-import dataclasses
+from dataclasses import dataclass
+from lib.solutions import utils
+
 # (item, amount, special_offer, price_per_unit)
 ITEM_OFFERS = {
     "A": ("A", 3, 130, 50),
@@ -24,7 +26,7 @@ def get_special_price(sku: str) -> Tuple[Any, Any, int]:
 
 
 def checkout(skus: str) -> int:
-    """" Calculates total prices given skus strings
+    """ Calculates total prices given skus strings
     Note:
         Translates skus into key-value where key is the SKU and value is the SKU count.
         Based on the special offers table, we apply necessary offers to SKUs that have special
@@ -33,7 +35,7 @@ def checkout(skus: str) -> int:
     if not isinstance(skus, str) or (len(skus) > 0 and not skus.isupper()):
         return -1
 
-    container = split_sku_str_number(skus)
+    container = utils.split_sku_str_number(skus)
     total = 0
     for item in container:
         tmp = get_special_price(item[0])
@@ -49,25 +51,28 @@ def checkout(skus: str) -> int:
     return total
 
 
-def split_sku_str_number(skus: str) -> List[Tuple[str, int]]:
-    """ Map sku character string with corresponding count
+@dataclass
+class SKU:
     """
-    results = [i for i in re.split(r"(\d+[A-Z]{1})|([A-Z])", skus) if i]
-    tmp = {}
-    for item in results:
-        if len(item) == 1 and item not in tmp:
-            tmp[item] = 1
-        elif len(item) > 1:
-            if item[-1] not in tmp:
-                tmp[item[-1]] = int(item[:-1])
-            else:
-                tmp[item[-1]] += int(item[:-1])
-        else:
-            tmp[item] += 1
-    return list(zip(tmp.keys(), tmp.values()))
+    Represents SKU item with corresponding offers if any
+    Example: sku: A, offers --> [(3,130), (5)]
+    """
+    symbol: str
+    offers: List[Tuple[int, int]]
+
 
 
 class SuperMarket:
+    def __init__(self):
+        pass
+
+    def checkout(self, skus: str) -> int:
+        """ Calculates total prices given skus strings
+        Note:
+            Translates skus into key-value where key is the SKU and value is the SKU count.
+            Based on the special offers table, we apply necessary offers to SKUs that have special
+            offers
+        """
 
 
 
