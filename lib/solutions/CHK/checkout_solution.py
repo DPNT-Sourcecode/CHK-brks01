@@ -83,6 +83,7 @@ class SKU:
         if not self.has_special_offers():
             return self.count * self.price
         else:
+            # 2AB3E
             for offer in self.offers:
                 discount_total = self.count // offer.discount_amount
                 non_discount_total = self.count % offer.discount_amount
@@ -99,10 +100,12 @@ class SKU:
 @dataclass
 class SuperMarket:
     skus: str
+    shopping_cart: List[SKU]
 
 
-    def build_shopping_cart(self) -> List[SKU]:
+    def build_shopping_cart(self) -> None:
         cart = utils.split_sku_str_number(self.skus)
+        for item in cart
 
 
     def checkout(self) -> int:
@@ -112,6 +115,7 @@ class SuperMarket:
             Based on the special offers table, we apply necessary offers to SKUs that have special
             offers
         """
+
 
 
 
