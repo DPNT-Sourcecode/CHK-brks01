@@ -4,6 +4,7 @@
 # skus = unicode string
 from typing import List, Tuple, Any, Optional
 import re
+import dataclasses
 # (item, amount, special_offer, price_per_unit)
 ITEM_OFFERS = {
     "A": ("A", 3, 130, 50),
@@ -64,6 +65,10 @@ def split_sku_str_number(skus: str) -> List[Tuple[str, int]]:
         else:
             tmp[item] += 1
     return list(zip(tmp.keys(), tmp.values()))
+
+
+class SuperMarket:
+
 
 
 
