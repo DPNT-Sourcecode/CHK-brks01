@@ -6,7 +6,7 @@ from lib.solutions.CHK import checkout_solution
 class TestCheckout:
     @pytest.mark.parametrize("inputs", [("A", 50), ("4A2B2E", 275), ("AAA", 130), ("", 0), ("3A2BC2A", 265)])
     def test_checkout_round_1(self, inputs: Tuple[Any, int]) -> None:
-        result = checkout_solution.checkout(inputs[0])
+        result = checkout_solution.checkout("3A2BC2A")
         assert result == inputs[1]
 
     def test_checkout_round_1_fail(self) -> None:
@@ -20,5 +20,6 @@ class TestCheckout:
 
     def test_get_offers(self) -> None:
         assert checkout_solution.get_offers("C") == []
+
 
 
