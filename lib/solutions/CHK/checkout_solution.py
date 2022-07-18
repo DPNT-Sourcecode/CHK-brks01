@@ -2,9 +2,23 @@
 
 # noinspection PyUnusedLocal
 # skus = unicode string
-from typing import List
+from typing import List, Any
 from dataclasses import dataclass
 from lib.solutions.utils import checkout_helpers
+
+PRICE_TABLE = {
+    "A": 50,
+    "B": 30,
+    "C": 20,
+    "D": 15,
+    "E": 40
+}
+
+SPECIALS_PRICE_TABLE = {
+    "A": [(3, 130), (5, 200)],
+    "B": [(2, 45)],
+    "E": [(2, -30)]
+}
 
 
 @dataclass
@@ -48,6 +62,21 @@ class SKU:
                         self.sku_total_cost += total
                     temp_count -= offer.discount_amount
 
+def get_offers(symbol: str) -> List[Any]:
+
+    offers = SPECIALS_PRICE_TABLE.get(symbol, [])
+    offer_container = []
+    if not offers:
+        return []
+    else:
+        for offer in offers:
+            offer_container.append(Offer(discount_amount=offer[0], special_price=offer[1]))
+    return sorted(offer_container, key=lambda itm: itm.discount_amount, reverse=True)
+
+
+def get_sku_price(symbol: str) -> int:
+    return PRICE_TABLE.get(symbol, 0)
+
 
 class SuperMarket:
 
@@ -58,8 +87,8 @@ class SuperMarket:
     def build_shopping_cart(self) -> None:
         cart = checkout_helpers.split_sku_str_number(self.skus)
         for item in cart:
-            price = checkout_helpers.get_sku_price(symbol=item[0])
-            offers = checkout_helpers.get_offers(symbol=item[0])
+            price = get_sku_price(symbol=item[0])
+            offers = get_offers(symbol=item[0])
             sku = SKU(symbol=item[0], count=item[1], price=price, offers=offers)
             sku.calculate_sku_total_cost()
             self.shopping_cart.append(sku)
@@ -80,6 +109,7 @@ def checkout(skus: str) -> int:
     super_market = SuperMarket(skus=skus)
     super_market.build_shopping_cart()
     return super_market.compute_checkout_cost()
+
 
 
 

@@ -14,5 +14,12 @@ class TestCheckout:
     def test_symbols_input(self) -> None:
         assert checkout_solution.checkout("-") == -1
 
+    def test_get_sku_price(self) -> None:
+        assert checkout_solution.get_sku_price("A") == 50
+
+    def test_get_offers(self) -> None:
+        assert checkout_solution.get_offers("C") == []
+
+
 
 
