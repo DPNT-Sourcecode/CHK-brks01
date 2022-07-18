@@ -1,5 +1,21 @@
 import re
 from typing import List, Tuple
+from lib.solutions.CHK.checkout_solution import Offer
+
+
+PRICE_TABLE = {
+    "A": 50,
+    "B": 30,
+    "C": 20,
+    "D": 15,
+    "E": 40
+}
+
+SPECIALS_PRICE_TABLE = {
+    "A": [(3, 130), (5, 200)],
+    "B": [(2, 45)],
+    "E": [(2, -30)]
+}
 
 
 def split_sku_str_number(skus: str) -> List[Tuple[str, int]]:
@@ -18,3 +34,17 @@ def split_sku_str_number(skus: str) -> List[Tuple[str, int]]:
         else:
             tmp[item] += 1
     return list(zip(tmp.keys(), tmp.values()))
+
+
+def get_offers(symbol: str) -> List[Offer]:
+    offers = SPECIALS_PRICE_TABLE.get(symbol, [])
+    offer_container = []
+    if not offers:
+        return []
+    else:
+        for offer in offers:
+            offer_container.append(Offer(discount_amount=offer[0], special_price=offer[1]))
+
+
+def get_sku_price(symbol: str) -> int:
+    return PRICE_TABLE.get(symbol, 0)
