@@ -3,8 +3,8 @@ from lib.solutions.CHK import checkout_solution
 
 class TestCheckout:
     def test_checkout_round_1(self) -> None:
-        result = checkout_solution.checkout("AxA")
-        assert result == -1
+        result = checkout_solution.checkout("AAA")
+        assert result == 130
 
     def test_checkout_round_1_fail(self) -> None:
         result = checkout_solution.checkout(123)
@@ -17,4 +17,5 @@ class TestCheckout:
     def test_symbols_input(self) -> None:
         result = checkout_solution.checkout("-")
         assert result == -1
+
 
